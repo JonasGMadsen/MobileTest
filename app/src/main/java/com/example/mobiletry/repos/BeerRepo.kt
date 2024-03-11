@@ -30,6 +30,7 @@ class BeerRepo {
         getBeers()
     }
 
+//Maybe make private later
     fun getBeers() {
         reloadingLiveData.value = true
         beerService.getAllBeers().enqueue(object : Callback<List<Beer>> {
