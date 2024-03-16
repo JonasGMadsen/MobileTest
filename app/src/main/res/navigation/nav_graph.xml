@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/SecondFragment">
+    app:startDestination="@id/FirstFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_beerListFragment_to_beerDetailFragment"
             app:destination="@id/beerDetailFragment" />
+        <action
+            android:id="@+id/action_beerListFragment_to_create_and_update_beer_fragment"
+            app:destination="@id/create_and_update_beer_fragment" />
     </fragment>
 
     <fragment
@@ -29,4 +32,11 @@
         android:name="com.example.mobiletry.BeerDetailFragment"
         android:label="fragment_beer_detail"
         tools:layout="@layout/fragment_beer_detail" />
+
+   <!-- <fragment
+        android:id="@+id/create_and_update_beer_fragment"
+        android:name="com.example.mobiletry.CreateAndUpdateFragment"
+        android:label="fragment_Update_and_Create"
+        tools:layout="@layout/fragment_create_and_update" />
+    -->
 </navigation>
