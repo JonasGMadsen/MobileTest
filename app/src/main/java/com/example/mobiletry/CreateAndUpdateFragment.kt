@@ -1,4 +1,4 @@
-/* package com.example.mobiletry
+package com.example.mobiletry
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,62 +7,48 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mobiletry.models.Beer
+import com.example.mobiletry.models.BeerViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class CreateAndUpdateFragment : Fragment() {
 
-    private var beer: Beer? = null
+    private lateinit var viewModel: BeerViewModel
+    private val firebaseUser = FirebaseAuth.getInstance().currentUser
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            beer = it.getSerializable("beer") as? Beer
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
+        val view = inflater.inflate(R.layout.fragment_create_and_update, container, false)
+
+        val breweryInput = view.findViewById<EditText>(R.id.breweryInput)
+        val nameInput = view.findViewById<EditText>(R.id.nameInput)
+        val styleInput = view.findViewById<EditText>(R.id.styleInput)
+        val abvInput = view.findViewById<EditText>(R.id.abvInput)
+        val volumeInput = view.findViewById<EditText>(R.id.volumeInput)
+        val howManyInput = view.findViewById<EditText>(R.id.howManyInput)
+
+        view.findViewById<Button>(R.id.submitButton).setOnClickListener {
+            val user = firebaseUser?.email ?: "Unknown"
+            val brewery = breweryInput.text.toString()
+            val name = nameInput.text.toString()
+            val style = styleInput.text.toString()
+            val abv = abvInput.text.toString().toDoubleOrNull() ?: 0.0
+            val volume = volumeInput.text.toString().toDoubleOrNull() ?: 0.0
+            val howMany = howManyInput.text.toString().toIntOrNull() ?: 0
+
+            val newBeer = Beer(user = user, brewery = brewery, name = name, style = style, abv = abv, volume = volume, howMany = howMany)
+            viewModel.add(newBeer)
+            findNavController().popBackStack()
         }
+
+        return view
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_create_and_update, container, false)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this)[BeerViewModel::class.java]
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        beer?.let { populateFields(it) }
-
-        view.findViewById<Button>(R.id.buttonSaveBeer).setOnClickListener {
-            saveBeer()
-        }
-    }
-
-    private fun populateFields(beer: Beer) {
-        view?.findViewById<EditText>(R.id.editTextBeerName)?.setText(beer.name)
-        // Populate other fields with beer details
-    }
-
-    private fun saveBeer() {
-        val name = view?.findViewById<EditText>(R.id.editTextBeerName)?.text.toString()
-        // Retrieve other field values
-
-        val newOrUpdatedBeer = beer?.copy(
-            name = name
-            // Copy other properties from input fields
-        ) ?: Beer(
-            id = /* Generate ID for new beer or use a placeholder */,
-            user = /* Get user input or use a placeholder */,
-            brewery = /* Brewery input */,
-            name = name,
-            style = /* Style input */,
-            abv = /* ABV input */,
-            volume = /* Volume input */,
-            pictureURL = /* Picture URL input, handle nullable */,
-            howMany = /* howMany input */
-        )
-
-        // Depending on your setup, add newOrUpdatedBeer to your data store or update the existing one
-        // This could involve a database operation or an API call
-
-        // After saving, navigate back or update UI as necessary
-        // For example, you could pop the fragment off the stack to return to the previous screen
-        findNavController().popBackStack()
-    }
-} */
+}

@@ -5,24 +5,58 @@
     android:padding="16dp">
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
 
         <EditText
-            android:id="@+id/editTextBeerName"
+            android:id="@+id/breweryInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="string/beer_name"
-            android:inputType="text" />
+            android:hint="Brewery"/>
 
-        <!-- Include EditTexts for other properties like brewery, style, abv, etc. -->
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"/>
+
+        <EditText
+            android:id="@+id/styleInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Style"/>
+
+        <EditText
+            android:id="@+id/abvInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ABV"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/volumeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Volume"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/howManyInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="How Many"
+            android:inputType="number"/>
 
         <Button
-            android:id="@+id/buttonSaveBeer"
+            android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="string/save_beer" />
+            android:text="Submit"
+            android:layout_gravity="center"/>
+
     </LinearLayout>
 </ScrollView>

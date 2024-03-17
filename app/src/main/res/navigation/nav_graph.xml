@@ -24,19 +24,19 @@
             app:destination="@id/beerDetailFragment" />
         <action
             android:id="@+id/action_beerListFragment_to_create_and_update_beer_fragment"
-            app:destination="@id/create_and_update_beer_fragment" />
-    </fragment>
+            app:destination="@id/createAndUpdateFragment" />
+</fragment>
 
-    <fragment
-        android:id="@+id/beerDetailFragment"
-        android:name="com.example.mobiletry.BeerDetailFragment"
-        android:label="fragment_beer_detail"
-        tools:layout="@layout/fragment_beer_detail" />
+<fragment
+    android:id="@+id/beerDetailFragment"
+    android:name="com.example.mobiletry.BeerDetailFragment"
+    android:label="fragment_beer_detail"
+    tools:layout="@layout/fragment_beer_detail" />
 
-   <!-- <fragment
-        android:id="@+id/create_and_update_beer_fragment"
-        android:name="com.example.mobiletry.CreateAndUpdateFragment"
-        android:label="fragment_Update_and_Create"
-        tools:layout="@layout/fragment_create_and_update" />
-    -->
+<fragment
+    android:id="@+id/createAndUpdateFragment"
+    android:name="com.example.mobiletry.CreateAndUpdateFragment"
+    android:label="Create Beer"
+    tools:layout="@layout/fragment_create_and_update" />
+
 </navigation>

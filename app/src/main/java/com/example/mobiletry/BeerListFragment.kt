@@ -3,9 +3,11 @@ package com.example.mobiletry
 import com.example.mobiletry.models.BeerAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -28,6 +30,7 @@ class BeerListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(BeerViewModel::class.java)
+        setHasOptionsMenu(true)
 
         beersAdapter = BeerAdapter { beer ->
             val bundle = Bundle().apply {
@@ -44,6 +47,36 @@ class BeerListFragment : Fragment() {
         viewModel.beersLiveData.observe(viewLifecycleOwner) { beers ->
             beersAdapter.setBeers(beers)
         }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        // Clear the existing menu items
+        menu.clear()
+        // Inflate the new menu
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_create_update -> {
+                // Correctly find NavController and navigate
+                val navController = findNavController()
+                navController.navigate(R.id.createAndUpdateFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+
+
+    //Henter hele listen igen når jeg går tilbage til fragmentet. Ville mega dårligt at bruge hvis man fx. Har meget data
+    override fun onResume() {
+        super.onResume()
+        viewModel.reload() // Assuming 'reload' fetches the latest data
     }
 
 

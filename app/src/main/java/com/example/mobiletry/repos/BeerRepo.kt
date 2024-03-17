@@ -82,6 +82,7 @@ class BeerRepo {
                 if (response.isSuccessful) {
                     Log.d("APPLE", "Deleted: " + response.body())
                     updateMessageLiveData.postValue("Deleted: " + response.body())
+                    beersLiveData.value as MutableList<Beer>
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessageLiveData.postValue(message)

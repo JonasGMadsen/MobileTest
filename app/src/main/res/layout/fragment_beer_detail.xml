@@ -54,6 +54,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+
+
+
         <!-- Add other details as needed, like howMany or user -->
 
     </LinearLayout>

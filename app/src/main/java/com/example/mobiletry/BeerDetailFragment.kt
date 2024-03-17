@@ -7,17 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletry.databinding.FragmentBeerDetailBinding
 import com.example.mobiletry.models.Beer
 import com.example.mobiletry.models.BeerViewModel
 
+
 class BeerDetailFragment : Fragment() {
 
     private lateinit var beer: Beer
     private var _binding: FragmentBeerDetailBinding? = null
+    private val beersViewModel: BeerViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -43,16 +47,26 @@ class BeerDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Husk at update dine bindings brudda
+        binding.beerUserDetail.text = beer.user
         binding.beerNameDetail.text = beer.name
         binding.beerBreweryDetail.text = beer.brewery
         binding.beerStyleDetail.text = beer.style
         binding.beerAbvDetail.text = beer.abv.toString()
         binding.beerVolumeDetail.text = beer.volume.toString()
         binding.beerHowManyDetail.text = beer.howMany.toString()
-        binding.beerUserDetail.text = beer.user
+
+
+        binding.buttonDelete.setOnClickListener {
+            beersViewModel.delete(beer.id)
+            findNavController().popBackStack()
+
+        }
+
 
 
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
