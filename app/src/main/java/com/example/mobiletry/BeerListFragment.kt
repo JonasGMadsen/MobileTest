@@ -73,7 +73,7 @@ class BeerListFragment : Fragment() {
 
 
 
-    //Henter hele listen igen når jeg går tilbage til fragmentet. Ville mega dårligt at bruge hvis man fx. Har meget data
+    //Henter hele listen igen når jeg går tilbage til fragmentet. Ville mega dårligt at bruge hvis man fx. Listen har meget data
     override fun onResume() {
         super.onResume()
         viewModel.reload() // Assuming 'reload' fetches the latest data
