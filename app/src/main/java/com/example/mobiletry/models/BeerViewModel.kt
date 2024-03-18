@@ -34,4 +34,24 @@ class BeerViewModel : ViewModel() {
     fun update(beer: Beer) {
         repository.updateBeer(beer)
     }
+
+    fun sortByUser() {
+        repository.sortByUser()
+    }
+
+    fun sortByBrewery() {
+        repository.sortByBrewery()
+    }
+
+    fun sortByBreweryDescending() {
+        repository.sortByBreweryDesc()
+    }
+
+    fun sortByName() {
+        repository.sortByName()
+    }
+
+    fun sortByNameDescending() {
+        repository.sortByNameDesc()
+    }
 }

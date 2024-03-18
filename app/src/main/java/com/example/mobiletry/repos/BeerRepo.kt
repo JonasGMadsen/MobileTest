@@ -116,7 +116,29 @@ class BeerRepo {
         })
     }
 
+    fun sortByUser() {
+        val beers: MutableList<Beer> = beersLiveData.value as MutableList<Beer>
+        beers.sortBy { it.user }
+        beersLiveData.postValue(beers)
+    }
 
+    //tjek hvilken funktion der er bedst i kotlin
+
+    fun sortByBrewery() {
+        beersLiveData.value?.sortedBy { it.brewery }
+    }
+
+    fun sortByBreweryDesc() {
+        beersLiveData.value?.sortedByDescending { it.brewery }
+    }
+
+    fun sortByName() {
+        beersLiveData.value?.sortedBy { it.name }
+    }
+
+    fun sortByNameDesc() {
+        beersLiveData.value?.sortedByDescending { it.name }
+    }
 
 
 }
