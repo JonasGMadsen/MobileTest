@@ -3,7 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.mobiletry.MainActivity">
     <item
-        android:id="@+id/action_create_update"
-        android:title="Add New Beer"
-        app:showAsAction="never" />
+        android:id="@+id/sort_by_name"
+        android:title="Sort by Name"/>
+    <item
+        android:id="@+id/sort_by_name_desc"
+        android:title="Sort by Name Descending"/>
+    <item
+        android:id="@+id/sort_by_brewery"
+        android:title="Sort by Brewery"/>
+    <item
+        android:id="@+id/sort_by_brewery_desc"
+        android:title="Sort by Brewery Descending"/>
+
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        android:orderInCategory="100"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 </menu>

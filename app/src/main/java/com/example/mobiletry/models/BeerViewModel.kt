@@ -1,12 +1,14 @@
 package com.example.mobiletry.models
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mobiletry.repos.BeerRepo
 
 class BeerViewModel : ViewModel() {
     private val repository = BeerRepo()
     val beersLiveData: LiveData<List<Beer>> = repository.beersLiveData
+
     val errorMessageLiveData: LiveData<String> = repository.errorMessageLiveData
     val updateMessageLiveData: LiveData<String> = repository.updateMessageLiveData
     val reloadingLiveData: LiveData<Boolean> = repository.reloadingLiveData
@@ -35,9 +37,9 @@ class BeerViewModel : ViewModel() {
         repository.updateBeer(beer)
     }
 
-    fun sortByUser() {
+   /* fun sortByUser() {
         repository.sortByUser()
-    }
+    } */
 
     fun sortByBrewery() {
         repository.sortByBrewery()
@@ -53,5 +55,13 @@ class BeerViewModel : ViewModel() {
 
     fun sortByNameDescending() {
         repository.sortByNameDesc()
+    }
+
+    fun filterByName(name: String) {
+        repository.filterByName(name)
+    }
+
+    fun filterByBrewery(brewery: String) {
+        repository.filterByBrewery(brewery)
     }
 }

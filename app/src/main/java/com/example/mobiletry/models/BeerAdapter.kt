@@ -29,12 +29,20 @@ class BeerAdapter(private val onClick: (Beer) -> Unit) : RecyclerView.Adapter<Be
 
     class BeerViewHolder(itemView: View, val onClick: (Beer) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val beerNameTextView: TextView = itemView.findViewById(R.id.beerNameTextView)
+        private val breweryNameTextView: TextView = itemView.findViewById(R.id.breweryNameTextView)
+
 
         fun bind(beer: Beer) {
             beerNameTextView.text = beer.name
+            breweryNameTextView.text = beer.brewery
             itemView.setOnClickListener {
                 onClick(beer)
             }
         }
+
+
+
+
+
     }
 }

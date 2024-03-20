@@ -116,28 +116,49 @@ class BeerRepo {
         })
     }
 
-    fun sortByUser() {
+   /* fun sortByUser() {
         val beers: MutableList<Beer> = beersLiveData.value as MutableList<Beer>
         beers.sortBy { it.user }
         beersLiveData.postValue(beers)
-    }
+    } */
 
     //tjek hvilken funktion der er bedst i kotlin
 
     fun sortByBrewery() {
-        beersLiveData.value?.sortedBy { it.brewery }
+        val sortedList = beersLiveData.value?.sortedBy { it.brewery } ?: listOf()
+        beersLiveData.postValue(sortedList)
     }
 
     fun sortByBreweryDesc() {
-        beersLiveData.value?.sortedByDescending { it.brewery }
+        val sortedList = beersLiveData.value?.sortedByDescending { it.brewery } ?: listOf()
+        beersLiveData.postValue(sortedList)
     }
 
     fun sortByName() {
-        beersLiveData.value?.sortedBy { it.name }
+        val sortedList = beersLiveData.value?.sortedBy { it.name } ?: listOf()
+        beersLiveData.postValue(sortedList)
     }
 
     fun sortByNameDesc() {
-        beersLiveData.value?.sortedByDescending { it.name }
+        val sortedList = beersLiveData.value?.sortedByDescending { it.name } ?: listOf()
+        beersLiveData.postValue(sortedList)
+    }
+
+    fun filterByName(name: String){
+        if (name.isBlank()){
+            getBeers()
+        } else {
+            val filteredList = beersLiveData.value?.filter { it.name.contains(name, ignoreCase = true) } ?: listOf()
+            beersLiveData.postValue(filteredList)
+        }
+    }
+
+    fun filterByBrewery(brewery: String){
+        if (brewery.isBlank()){
+            getBeers()
+        } else {
+            beersLiveData.value = beersLiveData.value?.filter { beer -> beer.brewery.contains(brewery) }
+        }
     }
 
 

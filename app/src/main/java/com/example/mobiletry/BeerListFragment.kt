@@ -8,6 +8,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -48,6 +51,13 @@ class BeerListFragment : Fragment() {
             beersAdapter.setBeers(beers)
         }
 
+        view.findViewById<Button>(R.id.addBeerButton).setOnClickListener {
+            findNavController().navigate(R.id.action_beerListFragment_to_create_and_update_beer_fragment)
+        }
+
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -56,14 +66,46 @@ class BeerListFragment : Fragment() {
         menu.clear()
         // Inflate the new menu
         inflater.inflate(R.menu.menu_main, menu)
+
+        val searchItem = menu.findItem(R.id.search)
+        val searchView = searchItem.actionView as? SearchView
+        setupSearchView(searchView)
+
     }
+
+    private fun setupSearchView(searchView: SearchView?) {
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.filterByName(newText ?: "")
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Optionally hide the keyboard or handle query submission
+                return true
+            }
+        })
+    }
+
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_create_update -> {
-                // Correctly find NavController and navigate
-                val navController = findNavController()
-                navController.navigate(R.id.createAndUpdateFragment)
+            R.id.sort_by_name -> {
+                viewModel.sortByName()
+                true
+            }
+            R.id.sort_by_name_desc -> {
+                viewModel.sortByNameDescending()
+                true
+            }
+            R.id.sort_by_brewery -> {
+                viewModel.sortByBrewery()
+                true
+            }
+            R.id.sort_by_brewery_desc -> {
+                viewModel.sortByBreweryDescending()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -73,7 +115,11 @@ class BeerListFragment : Fragment() {
 
 
 
-    //Henter hele listen igen når jeg går tilbage til fragmentet. Ville mega dårligt at bruge hvis man fx. Listen har meget data
+
+
+
+
+    //Henter hele listen igen når jeg går tilbage til fragmentet. Ville være mega dårligt at bruge hvis man fx. Listen har meget data
     override fun onResume() {
         super.onResume()
         viewModel.reload() // Assuming 'reload' fetches the latest data
