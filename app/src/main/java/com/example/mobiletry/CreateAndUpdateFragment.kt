@@ -30,6 +30,16 @@ class CreateAndUpdateFragment : Fragment() {
         val volumeInput = view.findViewById<EditText>(R.id.volumeInput)
         val howManyInput = view.findViewById<EditText>(R.id.howManyInput)
 
+        val beer = arguments?.getSerializable("beer") as? Beer
+        beer?.let {
+            breweryInput.setText(it.brewery)
+            nameInput.setText(it.name)
+            styleInput.setText(it.style)
+            abvInput.setText(it.abv.toString())
+            volumeInput.setText(it.volume.toString())
+            howManyInput.setText(it.howMany.toString())
+        }
+
         view.findViewById<Button>(R.id.submitButton).setOnClickListener {
             val user = firebaseUser?.email ?: "Unknown"
             val brewery = breweryInput.text.toString()

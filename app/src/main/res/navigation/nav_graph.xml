@@ -33,6 +33,10 @@
     android:label="fragment_beer_detail"
     tools:layout="@layout/fragment_beer_detail" />
 
+    <action
+        android:id="@+id/action_beerDetailFragment_to_createAndUpdateFragment"
+        app:destination="@id/createAndUpdateFragment" />
+
     <fragment
     android:id="@+id/createAndUpdateFragment"
     android:name="com.example.mobiletry.CreateAndUpdateFragment"

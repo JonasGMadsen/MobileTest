@@ -62,6 +62,18 @@ class BeerDetailFragment : Fragment() {
 
         }
 
+        binding.buttonUpdate.setOnClickListener {
+            beersViewModel.delete(beer.id)
+            findNavController().popBackStack()
+
+            val bundle = Bundle().apply {
+                putSerializable("beer", beer) // Make sure Beer implements Serializable
+            }
+            findNavController().navigate(R.id.action_beerDetailFragment_to_createAndUpdateFragment, bundle)
+
+
+        }
+
 
 
     }
