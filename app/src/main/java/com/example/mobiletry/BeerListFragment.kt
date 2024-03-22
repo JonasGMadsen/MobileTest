@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -62,9 +61,9 @@ class BeerListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        // Clear the existing menu items
+        // Clearer menuen. Tjek om skal fjernes senere
         menu.clear()
-        // Inflate the new menu
+        // Inflate overflor menues i dette fragment
         inflater.inflate(R.menu.menu_main, menu)
 
         val searchItem = menu.findItem(R.id.search)

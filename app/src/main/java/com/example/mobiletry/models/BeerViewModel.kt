@@ -8,7 +8,7 @@ import com.example.mobiletry.repos.BeerRepo
 class BeerViewModel : ViewModel() {
     private val repository = BeerRepo()
     val beersLiveData: LiveData<List<Beer>> = repository.beersLiveData
-
+    //Til senere måske. Ellers fjernes
     val errorMessageLiveData: LiveData<String> = repository.errorMessageLiveData
     val updateMessageLiveData: LiveData<String> = repository.updateMessageLiveData
     val reloadingLiveData: LiveData<Boolean> = repository.reloadingLiveData
@@ -37,10 +37,6 @@ class BeerViewModel : ViewModel() {
         repository.updateBeer(beer)
     }
 
-   /* fun sortByUser() {
-        repository.sortByUser()
-    } */
-
     fun sortByBrewery() {
         repository.sortByBrewery()
     }
@@ -61,6 +57,7 @@ class BeerViewModel : ViewModel() {
         repository.filterByName(name)
     }
 
+    //TODO
     fun filterByBrewery(brewery: String) {
         repository.filterByBrewery(brewery)
     }
