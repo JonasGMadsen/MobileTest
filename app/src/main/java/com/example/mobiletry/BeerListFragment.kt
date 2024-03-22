@@ -63,7 +63,7 @@ class BeerListFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         // Clearer menuen. Tjek om skal fjernes senere
         menu.clear()
-        // Inflate overflor menues i dette fragment
+        // Inflate overflow menuen i dette fragment
         inflater.inflate(R.menu.menu_main, menu)
 
         val searchItem = menu.findItem(R.id.search)
@@ -80,7 +80,6 @@ class BeerListFragment : Fragment() {
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Optionally hide the keyboard or handle query submission
                 return true
             }
         })
@@ -112,16 +111,10 @@ class BeerListFragment : Fragment() {
     }
 
 
-
-
-
-
-
-
     //Henter hele listen igen når jeg går tilbage til fragmentet. Ville være mega dårligt at bruge hvis man fx. Listen har meget data
     override fun onResume() {
         super.onResume()
-        viewModel.reload() // Assuming 'reload' fetches the latest data
+        viewModel.reload()
     }
 
 

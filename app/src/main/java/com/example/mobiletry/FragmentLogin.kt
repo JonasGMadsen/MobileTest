@@ -29,7 +29,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up click listeners for login and create account buttons
         binding.loginButton.setOnClickListener {
             // Knap til at logge ind
         }
