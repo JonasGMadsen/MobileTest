@@ -47,6 +47,7 @@ class LoginFragment : Fragment() {
                 binding.passwordEditText.error = "No password"
                 return@setOnClickListener
             }
+
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
