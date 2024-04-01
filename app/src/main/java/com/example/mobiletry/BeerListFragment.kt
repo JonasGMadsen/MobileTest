@@ -67,9 +67,6 @@ class BeerListFragment : Fragment() {
         // Inflate the new menu
         inflater.inflate(R.menu.menu_main, menu)
 
-        val searchItem = menu.findItem(R.id.search)
-        val searchView = searchItem.actionView as? SearchView
-        setupSearchView(searchView)
 
     }
 
