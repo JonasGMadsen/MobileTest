@@ -2,9 +2,7 @@ package com.example.mobiletry
 
 import com.example.mobiletry.models.BeerAdapter
 import android.os.Bundle
-import android.view.GestureDetector
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -24,13 +22,14 @@ class BeerDetailFragment : Fragment() {
     private lateinit var beer: Beer
     private var _binding: FragmentBeerDetailBinding? = null
     private val beersViewModel: BeerViewModel by activityViewModels()
-    private val binding get() = _binding!!
-    private lateinit var gestureDetector: GestureDetector
 
+    // This property is only valid between onCreateView and onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            // Make sure to cast the serializable to Beer
             beer = it.getSerializable("beer") as Beer
         }
     }
@@ -39,6 +38,7 @@ class BeerDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate the layout for this fragment using View Binding
         _binding = FragmentBeerDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -67,42 +67,21 @@ class BeerDetailFragment : Fragment() {
             findNavController().popBackStack()
 
             val bundle = Bundle().apply {
-                putSerializable("beer", beer)
+                putSerializable("beer", beer) // Make sure Beer implements Serializable
             }
             findNavController().navigate(R.id.action_beerDetailFragment_to_createAndUpdateFragment, bundle)
 
 
         }
 
-        gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onFling(
-                e1: MotionEvent?,
-                e2: MotionEvent,
-                velocityX: Float,
-                velocityY: Float
-            ): Boolean {
-                if (e1 != null && e2 != null) {
-                    val deltaX = e2.x - e1.x
-                    if (deltaX > 0) { // Swipe til højre hell yeah
-                        findNavController().popBackStack()
-                        return true
-                    }
-                }
-                return false
-            }
-        })
 
-        binding.root.setOnTouchListener { _, event ->
-            gestureDetector.onTouchEvent(event)
-            return@setOnTouchListener true
-        }
+
     }
-
 
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding = null // Clean up view binding
     }
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mobiletry.databinding.FragmentLoginBinding
-//import com.example.mobiletry.databinding.FragmentLogin
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
@@ -30,10 +29,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up click listeners for login and create account buttons
         binding.loginButton.setOnClickListener {
-            // Handle login button click
-            // You can implement login logic here
+            // Knap til at logge ind
         }
 
         binding.loginButton.setOnClickListener {
@@ -90,7 +87,6 @@ class LoginFragment : Fragment() {
                         Log.w("APPLE", "createUserWithEmail:failure", task.exception)
                         binding.createAccountText.text =
                             "Registration failed: " + task.exception?.message
-                        //updateUI(null)
                     }
         }
     }

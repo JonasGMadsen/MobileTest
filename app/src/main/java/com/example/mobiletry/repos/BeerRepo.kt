@@ -32,7 +32,6 @@ class BeerRepo {
         getBeers()
     }
 
-//Maybe make private later
     fun getBeers() {
         reloadingLiveData.value = true
         beerService.getAllBeers().enqueue(object : Callback<List<Beer>> {
@@ -116,13 +115,6 @@ class BeerRepo {
         })
     }
 
-   /* fun sortByUser() {
-        val beers: MutableList<Beer> = beersLiveData.value as MutableList<Beer>
-        beers.sortBy { it.user }
-        beersLiveData.postValue(beers)
-    } */
-
-    //tjek hvilken funktion der er bedst i kotlin
 
     fun sortByBrewery() {
         val sortedList = beersLiveData.value?.sortedBy { it.brewery } ?: listOf()
