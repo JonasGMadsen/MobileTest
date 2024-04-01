@@ -24,6 +24,7 @@ class BeerListFragment : Fragment() {
     private lateinit var viewModel: BeerViewModel
     private lateinit var beersAdapter: BeerAdapter
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_beer_list, container, false)
     }
@@ -55,37 +56,50 @@ class BeerListFragment : Fragment() {
             findNavController().navigate(R.id.action_beerListFragment_to_create_and_update_beer_fragment)
         }
 
+        val searchView = view.findViewById<SearchView>(R.id.searchViewFilterName)
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.filterByName(query.orEmpty())
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.filterByName(newText.orEmpty())
+                return true
+            }
+
+
+        })
+
+
 
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        // Clear the existing menu items
+        // Clearer gamle items (Tjek om skal slettes)
         menu.clear()
-        // Inflate the new menu
+        // Inflate menuen
         inflater.inflate(R.menu.menu_main, menu)
 
-        val searchItem = menu.findItem(R.id.search)
-        val searchView = searchItem.actionView as? SearchView
-        setupSearchView(searchView)
 
     }
 
-    private fun setupSearchView(searchView: SearchView?) {
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.filterByName(newText ?: "")
-                return true
-            }
-
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Optionally hide the keyboard or handle query submission
-                return true
-            }
-        })
-    }
 
 
 
@@ -111,11 +125,6 @@ class BeerListFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
-
-
-
 
 
 

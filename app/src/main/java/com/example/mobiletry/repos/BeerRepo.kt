@@ -148,8 +148,8 @@ class BeerRepo {
         if (name.isBlank()){
             getBeers()
         } else {
-            val filteredList = beersLiveData.value?.filter { it.name.contains(name, ignoreCase = true) } ?: listOf()
-            beersLiveData.postValue(filteredList)
+            beersLiveData.value = beersLiveData.value?.filter { beer -> beer.name.contains(name) }
+
         }
     }
 
