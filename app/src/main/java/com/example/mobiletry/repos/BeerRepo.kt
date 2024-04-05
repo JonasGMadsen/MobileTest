@@ -20,9 +20,6 @@ class BeerRepo {
     val updateMessageLiveData: MutableLiveData<String> = MutableLiveData()
 
 
-
-
-
     init {
         val build: Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -137,22 +134,19 @@ class BeerRepo {
         beersLiveData.postValue(sortedList)
     }
 
-    fun filterByName(name: String){
-        if (name.isBlank()){
+    fun filterByQuery(query: String) {
+        if (query.isBlank()) {
             getBeers()
         } else {
-            beersLiveData.value = beersLiveData.value?.filter { beer -> beer.name.contains(name) }
+            val filteredList = beersLiveData.value?.filter { beer ->
+                beer.name.contains(query, ignoreCase = true) || beer.brewery.contains(
+                    query,
+                    ignoreCase = true
+                )
+            }
+            beersLiveData.postValue(filteredList!!)
+
 
         }
     }
-
-    fun filterByBrewery(brewery: String){
-        if (brewery.isBlank()){
-            getBeers()
-        } else {
-            beersLiveData.value = beersLiveData.value?.filter { beer -> beer.brewery.contains(brewery) }
-        }
-    }
-
-
 }

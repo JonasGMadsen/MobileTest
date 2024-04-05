@@ -33,8 +33,11 @@ class BeerListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       // val userEmail = arguments?.getString("userEmail") ?: "Unknown User"
+       // view.findViewById<TextView>(R.id.welcomeMessageTextView).text = "Welcome to your list, $userEmail"
         viewModel = ViewModelProvider(this).get(BeerViewModel::class.java)
         setHasOptionsMenu(true)
+
 
         beersAdapter = BeerAdapter { beer ->
             val bundle = Bundle().apply {
@@ -42,6 +45,22 @@ class BeerListFragment : Fragment() {
             }
             findNavController().navigate(R.id.action_beerListFragment_to_beerDetailFragment, bundle)
         }
+
+        val searchView = view.findViewById<SearchView>(R.id.searchViewFilterName)
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.filterByQuery(query.orEmpty())
+                searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.filterByQuery(newText.orEmpty())
+                return true
+            }
+
+
+        })
 
         view.findViewById<RecyclerView>(R.id.beersRecyclerView).apply {
             layoutManager = LinearLayoutManager(context)
@@ -78,19 +97,7 @@ class BeerListFragment : Fragment() {
 
     }
 
-    private fun setupSearchView(searchView: SearchView?) {
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.filterByName(newText ?: "")
-                return true
-            }
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                // Optionally hide the keyboard or handle query submission
-                return true
-            }
-        })
-    }
 
 
 

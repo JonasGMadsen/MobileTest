@@ -53,12 +53,10 @@ class BeerViewModel : ViewModel() {
         repository.sortByNameDesc()
     }
 
-    fun filterByName(name: String) {
-        repository.filterByName(name)
+    fun filterByQuery(query: String) {
+        repository.filterByQuery(query)
     }
 
     //TODO
-    fun filterByBrewery(brewery: String) {
-        repository.filterByBrewery(brewery)
-    }
+
 }
