@@ -9,22 +9,28 @@
         android:id="@+id/FirstFragment"
         android:name="com.example.mobiletry.LoginFragment"
         android:label="@string/first_fragment_label">
-
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment">
+            <argument
+                android:name="userEmail"
+                app:argType="string" />
+        </action>
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.mobiletry.BeerListFragment"
         android:label="@string/second_fragment_label"/>
-
+        <argument
+        android:name="userEmail"
+        app:argType="string" />
+         <action
+        android:id="@+id/action_beerListFragment_to_beerDetailFragment"
+        app:destination="@id/beerDetailFragment" />
         <action
-            android:id="@+id/action_beerListFragment_to_beerDetailFragment"
-            app:destination="@id/beerDetailFragment" />
-        <action
-            android:id="@+id/action_beerListFragment_to_create_and_update_beer_fragment"
-            app:destination="@id/createAndUpdateFragment" />
+        android:id="@+id/action_beerListFragment_to_create_and_update_beer_fragment"
+        app:destination="@id/createAndUpdateFragment" />
 
 
     <fragment

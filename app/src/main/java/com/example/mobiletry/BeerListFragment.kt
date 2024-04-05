@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletry.models.BeerViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class BeerListFragment : Fragment() {
@@ -47,13 +48,20 @@ class BeerListFragment : Fragment() {
             adapter = beersAdapter
         }
 
+        val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
+
+
         viewModel.beersLiveData.observe(viewLifecycleOwner) { beers ->
-            beersAdapter.setBeers(beers)
+            val userBeers = beers.filter { it.user == currentUserEmail }
+            beersAdapter.setBeers(userBeers)
         }
 
         view.findViewById<Button>(R.id.addBeerButton).setOnClickListener {
             findNavController().navigate(R.id.action_beerListFragment_to_create_and_update_beer_fragment)
         }
+
+
+
 
 
 

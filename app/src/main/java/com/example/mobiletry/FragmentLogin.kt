@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.mobiletry.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
+
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
@@ -50,7 +51,7 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("APPLE", "createUserWithEmail:success")
-                        val user = auth.currentUser
+                        auth.currentUser
                         //updateUI(user)
                         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
                     } else {
