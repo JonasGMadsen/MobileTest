@@ -54,11 +54,11 @@ class LoginFragment : Fragment() {
                         //updateUI(user)
                         findNavController().navigate(R.id.action_loginFragment_to_beerListFragment)
 
-                       // val userId = currentUser?.uid  // Get the current Firebase user's UID
-                       // if (userId != null) {
-                            // Navigate using Safe Args, passing the user ID to the next fragment
-                        //    val action = LoginFragmentDirections.actionLoginFragmentToBeerListFragment(userId)
-                         //   findNavController().navigate(action)
+                      /*  if (task.isSuccessful) {
+                            val userId = FirebaseAuth.getInstance().currentUser?.uid
+                            if (userId != null) {
+                                val action = LoginFragmentDirections.actionLoginFragmentToBeerListFragment(userId)
+                                findNavController().navigate(action)  HJÆÆÆLP!*/
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("APPLE", "createUserWithEmail:failure", task.exception)

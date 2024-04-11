@@ -73,6 +73,17 @@ class BeerListFragment : Fragment() {
         viewModel.beersLiveData.observe(viewLifecycleOwner) { beers ->
             val userBeers = beers.filter { it.user == currentUserEmail }
             beersAdapter.setBeers(userBeers)
+
+
+
+          /*  val userId = arguments?.let { BeerListFragmentArgs.fromBundle(it).userId }
+            // Initialize your viewModel, adapters, etc., possibly using userId
+
+            // For example, if filtering beers by userId:
+            viewModel.beersLiveData.observe(viewLifecycleOwner) { beers ->
+                val userBeers = beers.filter { it.userId == userId }
+                beersAdapter.setBeers(userBeers)    Søg hjælp!!!!!! */
+
         }
 
         view.findViewById<Button>(R.id.addBeerButton).setOnClickListener {
