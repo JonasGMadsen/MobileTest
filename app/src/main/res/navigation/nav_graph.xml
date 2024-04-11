@@ -19,6 +19,9 @@
     <fragment
         android:id="@+id/beerListFragment"
         android:name="com.example.mobiletry.BeerListFragment">
+        <argument
+            android:name="userId"
+            app:argType="string"/>
 
     <action
         android:id="@+id/action_beerListFragment_to_beerDetailFragment"
