@@ -33,8 +33,8 @@ class BeerListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // val userEmail = arguments?.getString("userEmail") ?: "Unknown User"
-       // view.findViewById<TextView>(R.id.welcomeMessageTextView).text = "Welcome to your list, $userEmail"
+      //  val userId = arguments?.let { BeerListFragmentArgs.fromBundle(it).userId } HELP!!!!
+
         viewModel = ViewModelProvider(this).get(BeerViewModel::class.java)
         setHasOptionsMenu(true)
 
