@@ -76,7 +76,7 @@ class BeerListFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.addBeerButton).setOnClickListener {
-            findNavController().navigate(R.id.action_beerListFragment_to_create_and_update_beer_fragment)
+            findNavController().navigate(R.id.action_beerListFragment_to_createAndUpdateFragment)
         }
 
 

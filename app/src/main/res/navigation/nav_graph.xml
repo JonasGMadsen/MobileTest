@@ -3,41 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.mobiletry.LoginFragment"
-        android:label="@string/first_fragment_label">
+        android:id="@+id/loginFragment"
+        android:name="com.example.mobiletry.LoginFragment">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment">
-            <argument
-                android:name="userEmail"
-                app:argType="string" />
-        </action>
+            android:id="@+id/action_loginFragment_to_beerListFragment"
+            app:destination="@id/beerListFragment"/>
+        <argument
+            android:name="userId"
+            app:argType="string" />
     </fragment>
 
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.mobiletry.BeerListFragment"
-        android:label="@string/second_fragment_label"/>
-        <argument
-        android:name="userEmail"
-        app:argType="string" />
-         <action
+        android:id="@+id/beerListFragment"
+        android:name="com.example.mobiletry.BeerListFragment">
+
+    <action
         android:id="@+id/action_beerListFragment_to_beerDetailFragment"
-        app:destination="@id/beerDetailFragment" />
-        <action
-        android:id="@+id/action_beerListFragment_to_create_and_update_beer_fragment"
-        app:destination="@id/createAndUpdateFragment" />
+        app:destination="@id/beerDetailFragment" /> <!-- Corrected the action ID -->
+
+    <action
+        android:id="@+id/action_beerListFragment_to_createAndUpdateFragment"
+        app:destination="@id/createAndUpdateFragment" /> <!-- Corrected the action ID -->
+
+    <action
+        android:id="@+id/action_beerListFragment_to_loginFragment"
+        app:destination="@id/loginFragment" /> <!-- Corrected the action ID and destination -->
+    </fragment>
 
 
     <fragment
     android:id="@+id/beerDetailFragment"
     android:name="com.example.mobiletry.BeerDetailFragment"
     android:label="fragment_beer_detail"
-    tools:layout="@layout/fragment_beer_detail" />
+    tools:layout="@layout/fragment_beer_detail" >
+        <action
+            android:id="@+id/action_beerDetailFragment_to_beerListFragment"
+            app:destination="@id/beerListFragment" />
+    </fragment>
 
     <action
         android:id="@+id/action_beerDetailFragment_to_createAndUpdateFragment"
@@ -47,6 +52,11 @@
     android:id="@+id/createAndUpdateFragment"
     android:name="com.example.mobiletry.CreateAndUpdateFragment"
     android:label="Create Beer"
-    tools:layout="@layout/fragment_create_and_update" />
+    tools:layout="@layout/fragment_create_and_update" >
+        <action
+            android:id="@+id/action_createAndUpdateFragment_to_beerListFragment"
+            app:destination="@id/beerListFragment" />
+        <argument android:name="email" />
+    </fragment>
 
 </navigation>

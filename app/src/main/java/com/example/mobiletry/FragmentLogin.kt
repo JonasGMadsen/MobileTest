@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
                         Log.d("APPLE", "createUserWithEmail:success")
                         auth.currentUser
                         //updateUI(user)
-                        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_beerListFragment)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("APPLE", "createUserWithEmail:failure", task.exception)
@@ -82,7 +82,7 @@ class LoginFragment : Fragment() {
                         Log.d("APPLE", "createUserWithEmail:success")
                         val user = auth.currentUser
                         //updateUI(user)
-                        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_beerListFragment)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("APPLE", "createUserWithEmail:failure", task.exception)
