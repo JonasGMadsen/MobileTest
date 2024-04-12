@@ -27,6 +27,9 @@ class BeerDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         // Modtager beer objectet. Type safe.
         beer = args.beer
+
+
+
     }
 
     override fun onCreateView(
@@ -54,7 +57,6 @@ class BeerDetailFragment : Fragment() {
             beersViewModel.delete(beer.id) //Yeet!
             findNavController().popBackStack()
         }
-
 
     }
 

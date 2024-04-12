@@ -19,7 +19,4 @@ data class Beer(
         return super.toString()
     }
 
-
-
-
 }
