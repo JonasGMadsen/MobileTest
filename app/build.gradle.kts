@@ -54,14 +54,10 @@ dependencies {
     androidTestImplementation ("androidx.test:runner:1.5.2")
     androidTestImplementation ("androidx.test:rules:1.5.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-
     implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
     implementation("com.google.firebase:firebase-analytics")
 

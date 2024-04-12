@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_beerDetailFragment_to_beerListFragment"
             app:destination="@id/beerListFragment" />
+        <argument
+            android:name="beer"
+            app:argType="com.example.mobiletry.models.Beer" />
     </fragment>
 
     <action

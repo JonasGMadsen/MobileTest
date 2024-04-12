@@ -1,6 +1,5 @@
 package com.example.mobiletry
 
-import com.example.mobiletry.models.BeerAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -10,12 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobiletry.models.BeerAdapter
 import com.example.mobiletry.models.BeerViewModel
 import com.google.firebase.auth.FirebaseAuth
 
@@ -25,27 +24,27 @@ class BeerListFragment : Fragment() {
     private lateinit var viewModel: BeerViewModel
     private lateinit var beersAdapter: BeerAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_beer_list, container, false)
-    }
-
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-      //  val userId = arguments?.let { BeerListFragmentArgs.fromBundle(it).userId } HELP!!!!
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_beer_list, container, false)
         viewModel = ViewModelProvider(this).get(BeerViewModel::class.java)
         setHasOptionsMenu(true)
 
-
+        // Her bliver beer passed med safeargs
         beersAdapter = BeerAdapter { beer ->
-            val bundle = Bundle().apply {
-                putSerializable("beer", beer)
-            }
-            findNavController().navigate(R.id.action_beerListFragment_to_beerDetailFragment, bundle)
+            val action = BeerListFragmentDirections.actionBeerListFragmentToBeerDetailFragment(beer)
+            findNavController().navigate(action)
         }
 
+        // RecyclerView
+        view.findViewById<RecyclerView>(R.id.beersRecyclerView).apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = beersAdapter
+        }
+
+        // SearchView for filtering beers
         val searchView = view.findViewById<SearchView>(R.id.searchViewFilterName)
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -58,60 +57,28 @@ class BeerListFragment : Fragment() {
                 viewModel.filterByQuery(newText.orEmpty())
                 return true
             }
-
-
         })
 
-        view.findViewById<RecyclerView>(R.id.beersRecyclerView).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = beersAdapter
-        }
-
-        val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
-
-
+        // Observeere  live data og updaterer UI'et
         viewModel.beersLiveData.observe(viewLifecycleOwner) { beers ->
+            val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
             val userBeers = beers.filter { it.user == currentUserEmail }
             beersAdapter.setBeers(userBeers)
-
-
-
-          /*  val userId = arguments?.let { BeerListFragmentArgs.fromBundle(it).userId }
-            // Initialize your viewModel, adapters, etc., possibly using userId
-
-            // For example, if filtering beers by userId:
-            viewModel.beersLiveData.observe(viewLifecycleOwner) { beers ->
-                val userBeers = beers.filter { it.userId == userId }
-                beersAdapter.setBeers(userBeers)    Søg hjælp!!!!!! */
-
         }
 
+        // Knap
         view.findViewById<Button>(R.id.addBeerButton).setOnClickListener {
             findNavController().navigate(R.id.action_beerListFragment_to_createAndUpdateFragment)
         }
 
-
-
-
-
-
-
+        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        // Clear the existing menu items
         menu.clear()
-        // Inflate the new menu
         inflater.inflate(R.menu.menu_main, menu)
-
-
     }
-
-
-
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -135,18 +102,8 @@ class BeerListFragment : Fragment() {
         }
     }
 
-
-
-
-
-
-
-
-    //Henter hele listen igen når jeg går tilbage til fragmentet. Ville være mega dårligt at bruge hvis man fx. Listen har meget data
     override fun onResume() {
         super.onResume()
-        viewModel.reload() // Assuming 'reload' fetches the latest data
+        viewModel.reload() // Jeg behøves nu ikke længere at gå spadongo med at reloade
     }
-
-
 }
