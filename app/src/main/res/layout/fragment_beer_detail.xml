@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
 
-        <TextView
+        <EditText
             android:id="@+id/beerNameDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,31 +18,31 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <TextView
+        <EditText
             android:id="@+id/beerBreweryDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/beerStyleDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/beerAbvDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/beerVolumeDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/beerHowManyDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

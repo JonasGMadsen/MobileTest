@@ -40,7 +40,6 @@
     <fragment
     android:id="@+id/beerDetailFragment"
     android:name="com.example.mobiletry.BeerDetailFragment"
-    android:label="fragment_beer_detail"
     tools:layout="@layout/fragment_beer_detail" >
         <action
             android:id="@+id/action_beerDetailFragment_to_beerListFragment"
@@ -57,7 +56,6 @@
     <fragment
     android:id="@+id/createAndUpdateFragment"
     android:name="com.example.mobiletry.CreateAndUpdateFragment"
-    android:label="Create Beer"
     tools:layout="@layout/fragment_create_and_update" >
         <action
             android:id="@+id/action_createAndUpdateFragment_to_beerListFragment"
